@@ -1,0 +1,22 @@
+<aside class="site-aside bg-white">
+    <div class="aside-wrapper">
+        <a href="/" class="aside-brand d-none d-xl-flex" rel="home">
+            <img th:src="${site.logo}" class="logo nc-no-lazy" th:alt="${site.title}">
+            <img th:src="${site.favicon}" class="logo-sm nc-no-lazy"
+            th:alt="${site.title}">
+        </a>
+        <div class="aside-scroll scrollable hover">
+            <ul class="aside-menu" th:with="groups = ${linkFinder.groupBy()}">
+                <li class="menu-item menu-item-type-taxonomy menu-item-object-category" 
+                    th:each="group,iterStat : ${groups}" 
+                    th:if="${#annotations.getOrDefault(group, 'show_on_navbar','true') == 'true'}">
+                    <a th:onclick="document.getElementById('[(${group.metadata.name})]').scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'})"
+                        aria-current="page">
+                        <span class="menu-icon"><i th:class="|fas ${#annotations.get(group, 'icon')} fa-sm|"></i></span>
+                        <span class="menu-text" th:text="${group.spec.displayName}"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</aside>

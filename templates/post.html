@@ -1,10 +1,64 @@
 <!DOCTYPE html>
-<html
-  xmlns:th="https://www.thymeleaf.org"
-  th:replace="~{layout :: html(head = null,content = ~{::content})}"
->
-  <th:block th:fragment="content">
-    <h1 th:text="${post.spec.title}"></h1>
-    <article th:utext="${post.content.content}"></article>
-  </th:block>
+<html xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{modules/layout :: layout(_content = ~{::content},_title = ${post.spec.title})}">
+<th:block th:fragment="content">
+  <main class="site-main">
+    <div class="container">
+      <div class="container">
+        <div class="row gx-3 gx-md-4">
+          <div class="post card card-md mb-3 mb-md-4">
+            <div class="post-other-style">
+              <div class="post-heading text-center pt-5 pt-md-5 pb-3 pb-xl-4">
+                <h1 class="post-title" th:text="${post.spec.title}"></h1>
+                <div
+                  class="post-meta d-flex flex-fill justify-content-center align-items-center text-base mt-3 mt-md-3">
+                  <a class="d-flex align-items-center text-muted">
+                    <div class="flex-avatar w-16 me-2">
+                      <img alt="" th:src="@{/assets/image/default.gif}" 
+                      th:data-src="${post.owner.avatar}"  width="16"
+                        height="16" class="lazyload">
+                    </div>
+                    [[${post.owner.displayName}]]
+                  </a>
+                  <i class="text-light mx-2">•</i>
+                  <span class="date text-muted"><th:block th:replace="~{modules/widgets/time :: time(${post.spec.publishTime.toEpochMilli()})}"></th:block></span>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="post-tags">
+                </div>
+                <div class="post-content">
+                  <th:block th:utext="${post.content.content}"></th:block>
+                </div>
+                <div class="post-actions row g-2 mt-4">
+                  <!-- <div class="col">
+                    <a href="#" class="btn btn-light btn-icon btn-block btn-lg disabled">
+                      <span><i class="far fa-eye"></i></span>
+                      <b class="num" th:text="${post.stats.visit}"></b>
+                    </a>
+                  </div> -->
+                  <!-- <div class="col">
+                    <a href="#" class="btn btn-light btn-icon btn-block btn-lg disabled">
+                      <span><i class="far fa-thumbs-up"></i></span>
+                    </a>
+                  </div>
+                  <div class="col">
+                    <a href="#" class="btn-share-toggler btn btn-light btn-icon btn-block btn-lg disabled">
+                      <span><i class="far fa-star"></i></span>
+                    </a>
+                  </div>
+                  <div class="col-12 col-md-7">
+                    <a href="https://music.mancs.cn/" title="漫川Music" target="_blank"
+                      class="btn btn-primary btn-lg btn-block btn-goto">立即访问</a>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</th:block>
+
 </html>

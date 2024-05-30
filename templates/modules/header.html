@@ -1,0 +1,24 @@
+<header class="site-header bg-white">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a href="/" class="navbar-brand d-xl-none" rel="home"><img
+                th:src="${site.logo}" class="logo nc-no-lazy"
+                    th:alt="${site.title}"></a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav navbar-site me-auto ms-5 ms-xl-0" th:with="topMenu = ${menuFinder.getPrimary()}">
+                    <li th:each="menuItem,iterStat : ${topMenu.menuItems}"
+                        class="menu-item menu-item-type-taxonomy menu-item-object-category">
+                        <a th:href="@{${menuItem.status.href}}" th:title="${menuItem.status.displayName}"
+                            th:text="${menuItem.status.displayName}"></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="d-flex align-items-center flex-shrink-0 ms-auto me-lg-4">
+                <a href="/console" class="btn btn-link btn-icon btn-rounded ms-3 ms-md-4 "><span><i
+                            class="fa fa-user"></i></span></a>
+                <a href="javascript:;" class="btn btn-link btn-icon btn-rounded ms-3 ms-md-4 "
+                    id="menuCollasped"><span><i class="fas fa-th-large"></i></span></a>
+            </div>
+        </div>
+    </nav>
+</header>

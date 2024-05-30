@@ -1,0 +1,15 @@
+<footer class="site-footer">
+    <div class="container">
+        <div class="copyright text-xs text-muted text-center">
+            <span class="d-inline-block">© <th:block th:if="${#strings.isEmpty(theme.config.basic.copyright)}">[[${#dates.format(new java.util.Date(), 'yyyy')}]]</th:block> 
+                <th:block th:if="${not #strings.isEmpty(theme.config.basic.copyright)}">
+                    [[${theme.config.basic.copyright == #dates.format(new java.util.Date(), 'yyyy') ? theme.config.basic.copyright : theme.config.basic.copyright+' - ' +  #dates.format(new java.util.Date(), 'yyyy')}]]
+                </th:block>
+            </span>
+            <a class="text-muted" href="/" rel="home" th:text="${site.title}"></a>
+            <a th:if="${not #strings.isEmpty(theme.config.basic.beian.index_icp)}" class="text-muted" href="https://beian.miit.gov.cn/" th:text="${theme.config.basic.beian.index_icp}"></a>
+            <a th:if="${not #strings.isEmpty(theme.config.basic.beian.index_icp2)}" class="text-muted" href="https://beian.mps.gov.cn/#/query/webSearch" th:text="${theme.config.basic.beian.index_icp2}"></a>
+            
+        </div>
+    </div>
+</footer>

@@ -1,21 +1,21 @@
 apiVersion: theme.halo.run/v1alpha1
 kind: Theme
 metadata:
-  name: theme-starter
+  name: theme-mcnav
 spec:
-  displayName: Theme Starter
+  displayName: Mcnav
   author:
-    name: Halo
-    website: "https://github.com/halo-dev"
-  description: Halo 2.0 Theme base on Thymeleaf
-  logo: "https://www.halo.run/logo"
-  homepage: "https://github.com/halo-dev/theme-starter#readme"
-  repo: "https://github.com/halo-dev/theme-starter"
-  issues: "https://github.com/halo-dev/theme-starter/issues"
-  settingName: "theme-starter-setting"
-  configMapName: "theme-starter-configMap"
+    name: 困困鱼
+    website: "https://github.com/chengzhongxue"
+  description: 导航主题
+  logo: "/themes/theme-mcnav/assets/image/mcnav-logo.png"
+  homepage: "https://github.com/chengzhongxue/halo-theme-mcnav#readme"
+  repo: "https://github.com/chengzhongxue/halo-theme-mcnav"
+  issues: "https://github.com/chengzhongxue/halo-theme-mcnav/issues"
+  settingName: "theme-mcnav-setting"
+  configMapName: "theme-mcnav-configMap"
   version: "1.0.0"
-  requires: ">=2.0.0"
+  requires: ">=2.15.0"
   license:
     - name: "GPL-3.0"
-      url: "https://github.com/halo-dev/plugin-starter/blob/main/LICENSE"
+      url: "https://github.com/chengzhongxue/plugin-starter/blob/main/LICENSE"

@@ -1,18 +1,108 @@
 <!DOCTYPE html>
-<html
-  xmlns:th="https://www.thymeleaf.org"
-  th:replace="~{layout :: html(head = null,content = ~{::content})}"
->
-  <th:block th:fragment="content">
-    <ul>
-      <li th:each="post : ${posts.items}">
-        <a
-          th:href="@{${post.status.permalink}}"
-          th:text="${post.spec.title}"
-        ></a>
-      </li>
-    </ul>
-    <a th:if="${posts.hasPrevious()}" th:href="@{${posts.prevUrl}}">上一页</a>
-    <a th:if="${posts.hasNext()}" th:href="@{${posts.nextUrl}}">下一页</a>
-  </th:block>
+<html xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{modules/layout :: layout(_content = ~{::content},_title = null)}">
+<th:block th:fragment="content">
+  <main class="site-main" th:with="groups = ${linkFinder.groupBy()}">
+    <div class="container">
+      <div class="row g-3 g-xl-4">
+        
+        <div class="col-12 col-lg-4 d-lg-flex hot-rank" th:if="${not #lists.isEmpty(groups)}">
+          <div class="card card-xl flex-fill" th:with="group = ${groups.size > 1 ? (not #lists.isEmpty(groups[0].links) ? groups[0] : groups[1]) : groups[0]}">
+            <div class="card-header">
+              <div class="d-flex align-items-center">
+                <i th:class="|fas fa-sm ${#annotations.get(group, 'icon')}|"></i>
+                <div class="h4" th:text="${group.spec.displayName}"></div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="list-number list-row list-bordered">
+                <div class="list-item" th:each="link,iterStat : ${group.links}">
+                  <div class="list-content">
+                    <div class="list-body">
+                      <div class="list-title h-1x" th:text="${link.spec.displayName+' - '+link.spec.description}"></div>
+                    </div>
+                  </div>
+                  <a th:href="${link.spec.url}" target="_blank" th:title="${link.spec.description}"
+                    class="list-goto nav-item"></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-8 d-lg-flex tool-direct">
+          <div class="card card-xl flex-fill">
+            <div class="card-header">
+              <div class="d-flex align-items-center"> <i class="fas fa-sm fa-paperclip"></i>
+                <div class="h4">工具直达</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="index-sudoku row list text-center g-2 g-md-3 g-lg-4">
+                <div class="col-4 col-md-3 col-md-2 col-lg-2" th:each="tool,iter : ${theme.config.basic.tools}">
+                  <div class="list-item">
+                    <div th:style="|background: ${tool.background}|"
+                      class="btn btn-link btn-icon btn-md btn-rounded mx-auto mb-2">
+                      <span><i th:class="${tool.icon}"></i></span>
+                    </div>
+                    <div class="text-sm text-muted" th:text="${tool.name}"></div>
+                    <a th:href="${tool.url}" target="_blank" class="list-goto"></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div id="search" class="search-block card card-xl">
+            <div class="card-body">
+              <div class="search-tab">
+                <a th:each="search,iter : ${theme.config.basic.search}" href="javascript:;" th:data-url="${search.url}"
+                  class="btn btn-link btn-sm btn-rounded " th:classappend="${iter.index == 0 ? 'active' : '' }">
+                  <i th:class="${search.icon}" aria-hidden="true"></i>&nbsp;[[${search.name}]]</a>
+              </div>
+              <form> <input type="text" class="form-control" placeholder="请输入搜索关键词并按回车键…"></form>
+            </div>
+          </div>
+        </div>
+        <th:block th:each="group,iterStat : ${groups}">
+          <div class="col-12" th:if="${#annotations.getOrDefault(group, 'show_on_navbar','true') == 'true' && not #lists.isEmpty(group.links)}">
+            <div class="card" th:id="${group.metadata.name}">
+              <div class="card-header">
+                <div class="d-flex align-items-center">
+                  <i th:class="|fa-sm ${#annotations.get(group, 'icon')}|"></i>
+                  <div class="h4" th:text="${group.spec.displayName}"></div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row g-2 g-md-3 list-grid list-grid-padding">
+                  <div class="col-6 col-lg-3" th:each="link,iterStat : ${group.links}">
+                    <div class="list-item block" th:with="to_post = ${#annotations.get(link, 'to_post')}">
+                      <div th:href="${not #strings.isEmpty(to_post) ? postFinder.getByName(to_post).status.permalink : link.spec.url }" title="点击进入详情"
+                        class="media w-36 rounded-circle">
+                        <img th:src="@{/assets/image/default.gif}" th:data-src="${link.spec.logo}"
+                          class="media-content lazyload">
+                      </div>
+                      <div th:href="${link.spec.url}" target="_blank" th:title="${link.spec.description}"
+                        class="list-content">
+                        <div class="list-body">
+                          <div class="list-title text-md h-1x" th:text="${link.spec.displayName}"></div>
+                          <div class="list-desc text-xx text-muted mt-1">
+                            <div class="h-1x" th:text="${link.spec.description}"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </th:block>
+
+      </div>
+    </div>
+  </main>
+
+</th:block>
+
 </html>

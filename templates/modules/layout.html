@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="https://www.thymeleaf.org" th:fragment="layout(_content,_title)"
+  th:with="site_title = ${not #strings.isEmpty(_title) ?  _title+' - '+site.title  :  #strings.isEmpty(site.subtitle) ? site.title :  site.title +' - ' +site.subtitle }">
+
+<head th:replace="~{modules/head}"></head>
+
+<body class="home blog">
+  <div class="site-wrapper sidemenu-hover-deactive">
+    <th:block th:replace="~{modules/aside}" />
+    <th:block th:replace="~{modules/header}" />
+    <th:block th:replace="${_content}" />
+    <th:block th:replace="~{modules/footer}" />
+  </div>
+
+  <ul class="site-fixedmenu">
+    <li id="scrollToTOP" style=""> <a href="#" class="btn btn-start btn-icon btn-rounded"><span><i
+            class="fas fa-arrow-up"></i></span></a></li>
+  </ul>
+  <script th:src="@{/assets/js/lazyload.min.js?v={version}(version=${theme.spec.version})}" type="application/javascript"></script>
+  <script th:src="@{/assets/js/main.js?v={version}(version=${theme.spec.version})}" type="text/javascript"></script>
+
+</body>

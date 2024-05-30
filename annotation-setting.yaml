@@ -1,0 +1,45 @@
+apiVersion: v1alpha1
+kind: AnnotationSetting
+metadata:
+  generateName: annotation-setting-
+spec:
+  targetRef:
+    group: core.halo.run
+    kind: LinkGroup
+  formSchema:
+    - $formkit: "text"
+      name: "icon"
+      label: "图标"
+      value: ""
+      help: 图标库：https://fontawesome.com/
+    - $formkit: radio
+      name: show_on_navbar
+      label: 显示在navbar中
+      help: 控制此分组是否显示
+      value: "true"
+      options: 
+        - label: 显示
+          value: "true"
+        - label: 不显示
+          value: "false"
+
+---
+
+apiVersion: v1alpha1
+kind: AnnotationSetting
+metadata:
+  name: link-item-setting-hellopage
+spec:
+  targetRef:
+    group: core.halo.run
+    kind: Link
+  formSchema:
+    - $formkit: text
+      name: icon
+      label: 图标
+      value: ''
+      help: 图标库：https://fontawesome.com/
+    - $formkit: postSelect
+      name: to_post
+      label: 关联的文章
+      help: "当有关联的文章时，则跳转到对应文章，而不是直接访问地址"
