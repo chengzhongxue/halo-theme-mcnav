@@ -3,6 +3,7 @@
 </p>
 
 <p align="center">Mcnav导航主题</p>
+<p align="center"><a target="_blank" href="https://github.com/fordes123/ITEM">移植于 Typecho 的 ITEM</a></p>
 
 ![ScreenShot](https://api.minio.yyds.pink/halo-docs/2024/05/mcnav-1.png)
 ![ScreenShot](https://api.minio.yyds.pink/halo-docs/2024/05/mcnav.png)
