@@ -14,7 +14,7 @@
                 </ul>
             </div>
             <div class="d-flex align-items-center flex-shrink-0 ms-auto me-lg-4">
-                <a href="/console" class="btn btn-link btn-icon btn-rounded ms-3 ms-md-4 "><span><i
+                <a th:if="${theme.config.basic.console_button}" href="/console" class="btn btn-link btn-icon btn-rounded ms-3 ms-md-4 "><span><i
                             class="fa fa-user"></i></span></a>
                 <a href="javascript:;" class="btn btn-link btn-icon btn-rounded ms-3 ms-md-4 "
                     id="menuCollasped"><span><i class="fas fa-th-large"></i></span></a>

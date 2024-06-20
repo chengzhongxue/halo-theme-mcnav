@@ -6,29 +6,61 @@
     <div class="container">
       <div class="row g-3 g-xl-4">
         
-        <div class="col-12 col-lg-4 d-lg-flex hot-rank" th:if="${not #lists.isEmpty(groups)}">
-          <div class="card card-xl flex-fill" th:with="group = ${groups.size > 1 ? (not #lists.isEmpty(groups[0].links) ? groups[0] : groups[1]) : groups[0]}">
-            <div class="card-header">
-              <div class="d-flex align-items-center">
-                <i th:class="|fas fa-sm ${#annotations.get(group, 'icon')}|"></i>
-                <div class="h4" th:text="${group.spec.displayName}"></div>
+        <th:block th:if="${not #strings.isEmpty(theme.config.basic.hotGroup)}">
+          <div class="col-12 col-lg-4 d-lg-flex hot-rank">
+            <div class="card card-xl flex-fill">
+              <div class="card-header">
+                <div class="d-flex align-items-center">
+                  <i class="fas fa-sm fa-flag"></i>
+                  <div class="h4">热门站点</div>
+                </div>
               </div>
-            </div>
-            <div class="card-body">
-              <div class="list-number list-row list-bordered">
-                <div class="list-item" th:each="link,iterStat : ${group.links}">
-                  <div class="list-content">
-                    <div class="list-body">
-                      <div class="list-title h-1x" th:text="${link.spec.displayName+' - '+link.spec.description}"></div>
+              <div class="card-body">
+                <div class="list-number list-row list-bordered">
+                  <th:block th:each="link,iterStat : ${linkFinder.listBy(theme.config.basic.hotGroup)}">
+                    <div class="list-item" th:if="${iterStat.index<6}">
+                      <div class="list-content">
+                        <div class="list-body">
+                          <div class="list-title h-1x" th:text="${link.spec.displayName + (not #strings.isEmpty(link.spec.description) ? ' - ' + link.spec.description : '')}"></div>
+                        </div>
+                      </div>
+                      <a th:href="${link.spec.url}" target="_blank" th:title="${link.spec.description}"
+                         class="list-goto nav-item"></a>
                     </div>
-                  </div>
-                  <a th:href="${link.spec.url}" target="_blank" th:title="${link.spec.description}"
-                    class="list-goto nav-item"></a>
+                  </th:block>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </th:block>
+        <th:block th:unless="${not #strings.isEmpty(theme.config.basic.hotGroup)}">
+          <div class="col-12 col-lg-4 d-lg-flex hot-rank" th:if="${not #lists.isEmpty(groups)}">
+            <div class="card card-xl flex-fill" th:with="group = ${groups.size > 1 ? (not #lists.isEmpty(groups[0].links) ? groups[0] : groups[1]) : groups[0]}">
+              <div class="card-header">
+                <div class="d-flex align-items-center">
+                  <i th:class="|fas fa-sm ${#annotations.get(group, 'icon')}|"></i>
+                  <div class="h4" th:text="${group.spec.displayName}"></div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="list-number list-row list-bordered">
+                  <th:block th:each="link,iterStat : ${group.links}">
+                    <div class="list-item" th:if="${iterStat.index<6}">
+                      <div class="list-content">
+                        <div class="list-body">
+                          <div class="list-title h-1x" th:text="${link.spec.displayName + (not #strings.isEmpty(link.spec.description) ? ' - ' + link.spec.description : '')}"></div>
+                        </div>
+                      </div>
+                      <a th:href="${link.spec.url}" target="_blank" th:title="${link.spec.description}"
+                         class="list-goto nav-item"></a>
+                    </div>
+                  </th:block>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </th:block>
         <div class="col-12 col-lg-8 d-lg-flex tool-direct">
           <div class="card card-xl flex-fill">
             <div class="card-header">

@@ -7,6 +7,20 @@ spec:
     - group: basic
       label: 基础设置
       formSchema:
+        - $formkit: checkbox
+          name: console_button
+          label: 显示控制台跳转按钮
+          value: false
+        - $formkit: menuRadio
+          name: leftMenu
+          label: 左侧菜单
+          help: 【菜单】新建菜单组
+          value: ""
+        - $formkit: text
+          name: hotGroup
+          label: 热门分组
+          help: 获取方法请看文档
+          value: ""
         - $formkit: repeater
           name: tools
           label: 工具

@@ -43,3 +43,18 @@ spec:
       name: to_post
       label: 关联的文章
       help: "当有关联的文章时，则跳转到对应文章，而不是直接访问地址"
+
+---
+
+apiVersion: v1alpha1
+kind: AnnotationSetting
+metadata:
+  generateName: annotation-setting-
+spec:
+  targetRef:
+    group: ""
+    kind: MenuItem
+  formSchema:
+    - $formkit: "text"
+      name: "icon"
+      label: "图标"

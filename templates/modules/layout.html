@@ -13,10 +13,26 @@
   </div>
 
   <ul class="site-fixedmenu">
-    <li id="scrollToTOP" style=""> <a href="#" class="btn btn-start btn-icon btn-rounded"><span><i
+    <li id="scrollToTOP" style="display: none;"> <a href="#" class="btn btn-start btn-icon btn-rounded"><span><i
             class="fas fa-arrow-up"></i></span></a></li>
   </ul>
   <script th:src="@{/assets/js/lazyload.min.js?v={version}(version=${theme.spec.version})}" type="application/javascript"></script>
   <script th:src="@{/assets/js/main.js?v={version}(version=${theme.spec.version})}" type="text/javascript"></script>
+  <script>
+    var utils = {
+      scrollIntoView: function (href) {
+        if (href.indexOf("/") !== -1) {
+          window.location.href = href;
+        } else {
+          let element = document.getElementById(href);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } else {
+            window.location.href = '/';
+          }
+        }
+      }
+    }
+  </script>
 
 </body>
