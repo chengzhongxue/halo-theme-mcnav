@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="https://www.thymeleaf.org" th:fragment="layout(_content,_title)"
+<html th:lang="${#locale.toLanguageTag}" xmlns:th="https://www.thymeleaf.org" th:fragment="layout(_content,_title)"
   th:with="site_title = ${not #strings.isEmpty(_title) ?  _title+' - '+site.title  :  #strings.isEmpty(site.subtitle) ? site.title :  site.title +' - ' +site.subtitle }">
 
 <head th:replace="~{modules/head}"></head>
@@ -18,6 +18,7 @@
   </ul>
   <script th:src="@{/assets/js/lazyload.min.js?v={version}(version=${theme.spec.version})}" type="application/javascript"></script>
   <script th:src="@{/assets/js/main.js?v={version}(version=${theme.spec.version})}" type="text/javascript"></script>
+  <script th:src="@{/assets/js/custom.js?v={version}(version=${theme.spec.version})}" type="text/javascript"></script>
   <script>
     var utils = {
       scrollIntoView: function (href) {

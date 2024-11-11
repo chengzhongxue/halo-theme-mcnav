@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      th:replace="~{modules/layout :: layout(_content = ~{::content},_title = '归档')}">
+<th:block th:fragment="content">
+    <main class="site-main">
+        <div class="container">
+            <div class="row g-3 g-xl-4">
+                <div class="col-12">
+                    <div class="card card-xl" id="archives">
+                        <div id="archives-content">
+                            <th:block th:each="archive : ${archives.items}">
+                                <div th:each="month : ${archive.months}"
+                                     class="archive-title" th:id="|arti-${archive.year}-${month.month}|">
+                                    <h3>[[${archive.year}]]-[[${month.month}]]</h3>
+                                    <div class="archives archives-${month.month}" th:data-date="|${archive.year}-${month.month}|">
+                                        <div class="brick" th:each="post : ${month.posts}">
+                                            <a th:href="@{${post.status.permalink}}">
+                                                <span class="time">[[${#dates.format(post.spec.publishTime,'MM-dd')}]]</span>[[${post.spec.title}]]
+                                                <em th:if="${!post.spec.excerpt.autoGenerate}">([[${post.spec.excerpt.raw}]])</em>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</th:block>
+
+</html>

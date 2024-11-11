@@ -2,6 +2,7 @@
 <html xmlns:th="https://www.thymeleaf.org"
   th:replace="~{modules/layout :: layout(_content = ~{::content},_title = ${post.spec.title})}">
 <th:block th:fragment="content">
+  <th:block th:replace="~{modules/widgets/post-modal}" />
   <main class="site-main">
     <div class="container">
       <div class="container">
@@ -28,18 +29,40 @@
                 <div class="post-tags">
                 </div>
                 <div class="post-content">
-                  <th:block th:utext="${post.content.content}"></th:block>
+                  <div class="post-excerpt">
+                    <i class="excerpt-icon"></i>
+                    <h4 th:if="${!post.spec.excerpt.autoGenerate}" th:text="${post.spec.excerpt.raw}"></h4>
+<!--                    <div class="star-rating">-->
+<!--                      用户评分-->
+<!--                      <i class="text-light mx-2">•</i>-->
+<!--                      4.3分-->
+<!--                      <i class="text-light mx-2">•</i>-->
+<!--                      <i class="fas fa-star" style="color: #FFD43B;"></i>-->
+<!--                      <i class="fas fa-star" style="color: #FFD43B;"></i>-->
+<!--                      <i class="fas fa-star" style="color: #FFD43B;"></i>-->
+<!--                      <i class="fas fa-star" style="color: #FFD43B;"></i>-->
+<!--                      <i class="far fa-star" style="color: #FFD43B;"></i>-->
+<!--                    </div>-->
+                  </div>
+                  <div class="text-wrap text-break fs-6 mx-3">
+                    <th:block th:utext="${post.content.content}"></th:block>
+                  </div>
                 </div>
                 <div class="post-actions row g-2 mt-4">
-                  <!-- <div class="col">
+                  <div class="col">
                     <a href="#" class="btn btn-light btn-icon btn-block btn-lg disabled">
                       <span><i class="far fa-eye"></i></span>
                       <b class="num" th:text="${post.stats.visit}"></b>
                     </a>
-                  </div> -->
-                  <!-- <div class="col">
-                    <a href="#" class="btn btn-light btn-icon btn-block btn-lg disabled">
+                  </div>
+                  <div class="col">
+                    <a type="button"
+                       class="btn btn-light btn-icon btn-block btn-lg "
+                       id="agree-btn"
+                       th:data-cid="${post.metadata.name}"
+                       data-key="post">
                       <span><i class="far fa-thumbs-up"></i></span>
+                      <b class="num" th:text="${post.stats.upvote}"></b>
                     </a>
                   </div>
                   <div class="col">
@@ -47,10 +70,20 @@
                       <span><i class="far fa-star"></i></span>
                     </a>
                   </div>
-                  <div class="col-12 col-md-7">
-                    <a href="https://music.mancs.cn/" title="漫川Music" target="_blank"
-                      class="btn btn-primary btn-lg btn-block btn-goto">立即访问</a>
-                  </div> -->
+                  <th:block th:with="mcnav_post_type = ${#annotations.get(post, 'mcnav_post_type')},mcnav_post_url = ${#annotations.get(post, 'mcnav_post_url')}">
+                    <th:block th:if="${not #strings.isEmpty(mcnav_post_type)}">
+                      <div class="col-12 col-md-7" th:if="${mcnav_post_type == 'qrcode'}">
+                        <button id="copyTitleButton" class="btn btn-primary btn-lg btn-block btn-goto" th:data-value="${post.spec.title}">
+                          进入小程序
+                        </button>
+                      </div>
+                      <div class="col-12 col-md-7" th:if="${mcnav_post_type == 'url'}">
+                        <a th:href="${mcnav_post_url}" target="_blank" th:title="${post.spec.title}" class="btn btn-primary btn-lg btn-block btn-goto">
+                          访问网站
+                        </a>
+                      </div>
+                    </th:block>
+                  </th:block>
                 </div>
               </div>
             </div>

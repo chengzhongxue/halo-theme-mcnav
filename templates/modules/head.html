@@ -9,9 +9,11 @@
           th:href="${site.favicon}"/>
     <link rel="stylesheet" th:href="@{/assets/libs/bootstrap/bootstrap.min.css?v=5.1.3}">
     <link rel="stylesheet" th:href="@{/assets/css/style.css?v={version}(version=${theme.spec.version})}">
+    <link rel="stylesheet" th:href="@{/assets/css/custom.css?v={version}(version=${theme.spec.version})}">
     <link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/5.15.4/css/all.min.css">
-    <script th:src="@{/assets/libs/jquery//jquery.min.js?v=3.6.0}"
+    <script th:src="@{/assets/libs/jquery/jquery.min.js?v=3.6.0}"
         type="application/javascript"></script>
+    <script src="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/bootstrap/5.1.3/js/bootstrap.min.js" type="application/javascript"></script>
     <meta name="template" content="Mcnav">
     <link rel="alternate" type="application/rss+xml" th:title="|${site.title} » RSS 2.0|" href="/rss.xml">
     <style data-id="immersive-translate-input-injected-css">

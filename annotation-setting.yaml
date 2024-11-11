@@ -58,3 +58,35 @@ spec:
     - $formkit: "text"
       name: "icon"
       label: "图标"
+
+---
+
+apiVersion: v1alpha1
+kind: AnnotationSetting
+metadata:
+  generateName: annotation-setting-
+spec:
+  targetRef:
+    group: content.halo.run
+    kind: Post
+  formSchema:
+    - $formkit: "select"
+      name: "mcnav_post_type"
+      id: "mcnav_post_type"
+      value: "url"
+      label: "链接类型"
+      options:
+        - label: 链接
+          value: "url"
+        - label: 二维码
+          value: "qrcode"
+    - $formkit: "text"
+      if: "$get(mcnav_post_type).value == 'url'"
+      name: "mcnav_post_url"
+      key: "mcnav_post_url"
+      label: "链接"
+    - $formkit: "text"
+      if: "$get(mcnav_post_type).value == 'qrcode'"
+      name: "mcnav_post_qrcode"
+      key: "mcnav_post_qrcode"
+      label: "小程序二维码"
