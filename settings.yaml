@@ -7,7 +7,7 @@ spec:
     - group: basic
       label: 基础设置
       formSchema:
-        - $formkit: checkbox
+        - $formkit: switch
           name: console_button
           label: 显示控制台跳转按钮
           value: false
@@ -21,9 +21,14 @@ spec:
           label: 热门分组
           help: 获取方法请看文档
           value: ""
-        - $formkit: repeater
+        - $formkit: array
           name: tools
           label: 工具
+          itemLabels:
+            - type: text
+              label: $value.name
+            - type: text
+              label: $value.url
           value:
             - url: "https://www.hsmy.fun"
               name: "热榜速览"
@@ -50,9 +55,14 @@ spec:
             - $formkit: text
               name: background
               label: 背景颜色
-        - $formkit: repeater
+        - $formkit: array
           name: search
           label: 搜索引擎链接
+          itemLabels:
+            - type: text
+              label: $value.name
+            - type: text
+              label: $value.url
           value:
             - url: "https://www.google.com/search?q="
               name: "谷歌"
