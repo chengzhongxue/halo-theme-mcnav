@@ -1,7 +1,7 @@
 apiVersion: v1alpha1
 kind: AnnotationSetting
 metadata:
-  generateName: annotation-setting-
+  name: annotation-setting-mcnav-link-group
 spec:
   targetRef:
     group: core.halo.run
@@ -28,7 +28,7 @@ spec:
 apiVersion: v1alpha1
 kind: AnnotationSetting
 metadata:
-  name: link-item-setting-hellopage
+  name: annotation-setting-mcnav-link
 spec:
   targetRef:
     group: core.halo.run
@@ -49,7 +49,7 @@ spec:
 apiVersion: v1alpha1
 kind: AnnotationSetting
 metadata:
-  generateName: annotation-setting-
+  name: annotation-setting-mcnav-menu
 spec:
   targetRef:
     group: ""
@@ -64,7 +64,7 @@ spec:
 apiVersion: v1alpha1
 kind: AnnotationSetting
 metadata:
-  generateName: annotation-setting-
+  name: annotation-setting-mcnav-post
 spec:
   targetRef:
     group: content.halo.run
